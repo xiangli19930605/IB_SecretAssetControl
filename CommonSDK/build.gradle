@@ -100,7 +100,7 @@ dependencies {
 //    api 'io.netty:netty-all:5.0.0.Alpha2'
     api 'io.netty:netty-all:4.1.33.Final'
     api 'com.alibaba:fastjson:1.2.55'
-    api 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    api 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
 
     //二维码扫描

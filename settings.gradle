@@ -1,1 +1,1 @@
-include ':app', ':CommonSDK', ':CommonRes'
+include ':app', ':CommonSDK', ':CommonRes', ':module_main'
