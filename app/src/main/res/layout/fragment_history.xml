@@ -11,50 +11,49 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recyclerview"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:cacheColorHint="@null"-->
-            <!--android:scrollbars="vertical"/>-->
+        <!--android:id="@+id/recyclerview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:cacheColorHint="@null"-->
+        <!--android:scrollbars="vertical"/>-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_marginTop="@dimen/dp_8"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8" />
     </FrameLayout>
+
     <LinearLayout
         android:id="@+id/ll_mycollection_bottom_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="#e6e6e6"
-        android:orientation="vertical"
-       >
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="#e5e5e5"/>
+            android:background="#e5e5e5" />
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="已选择"
                 android:textColor="#1A1A1A"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tv_select_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +62,8 @@
                 android:layout_toRightOf="@+id/tv"
                 android:text="0"
                 android:textColor="#1A1A1A"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_delete"
@@ -76,7 +76,7 @@
                 android:gravity="center"
                 android:text="删除"
                 android:textColor="#b7b8bd"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/select_all"
@@ -89,7 +89,7 @@
                 android:gravity="center"
                 android:text="全选"
                 android:textColor="#000001"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         </RelativeLayout>
     </LinearLayout>

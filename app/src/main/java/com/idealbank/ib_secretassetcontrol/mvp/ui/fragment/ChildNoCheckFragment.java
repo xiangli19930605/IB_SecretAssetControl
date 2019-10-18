@@ -128,7 +128,7 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
                                     @Override
                                     public void onClick(String val) {
                                         //获取数据库中已盘数量-1
-                                        new DbManager().upDateAssetsBeanRemarkWhereId(mList.get(position).getId(), val);
+                                        new DbManager().upDateAssetsBeanRemarkWhereId(mAdapter.getData().get(position).getId(), val);
                                         mAdapter.notifyItemChanged(position);
                                     }
                                 })
@@ -169,8 +169,8 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
         Log.e("ChildNoCheckFragment","ChildNoCheckFragment");
         RfidData rfidData = (RfidData) event.getData();
         String val=rfidData.getTagid();
-        for (int i = 0; i <mList.size() ; i++) {
-            if(mList.get(i).getAssets().equals(event.getData().toString())){
+        for (int i = 0; i <mAdapter.getData().size() ; i++) {
+            if(mAdapter.getData().get(i).getAssets().equals(event.getData().toString())){
                 //先模糊查询FRID编号，得到的资产ID；再通过资产ID，修改资产状态
 //                AssetsBean assetsBean = new DbManager().queryAssetsBeanWhereRfid(val);
                 AssetsBean assetsBean = new DbManager().queryAssetsBeanWhereAssetsAndCheckId(taskid,val);

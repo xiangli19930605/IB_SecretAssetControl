@@ -107,7 +107,6 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
     }
 
     private void getDate() {
-
         mList = new DbManager().queryAssetsBeanWhereIdandState(taskid, 1);
         mAdapter.replaceData(mList);
     }
@@ -134,7 +133,7 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
                                     @Override
                                     public void onClick(String val) {
                                         //获取数据库中已盘数量-1
-                                        new DbManager().upDateAssetsBeanRemarkWhereId(mList.get(position).getId(), val);
+                                        new DbManager().upDateAssetsBeanRemarkWhereId(mAdapter.getData().get(position).getId(), val);
                                         mAdapter.notifyItemChanged(position);
                                     }
                                 })
@@ -157,9 +156,9 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
                                     @Override
                                     public void onClick(String val) {
                                         //先模糊查询FRID编号，得到的资产ID；再通过资产ID，修改资产状态
-                                        new DbManager().upDateAssetsBeanStateWhereId(mList.get(position).getId(), 1);
+                                        new DbManager().upDateAssetsBeanStateWhereId(mAdapter.getData().get(position).getId(), 1);
                                         //获取数据库中已盘数量+1
-                                        TaskBean taskBean= new DbManager().  queryTaskBeanWhereID(mList.get(position).getCheckId());
+                                        TaskBean taskBean= new DbManager().  queryTaskBeanWhereID(mAdapter.getData().get(position).getCheckId());
                                         int check = new DbManager().queryTaskBeanWhereUid(taskBean.getNumid()).getCheckNum() + 1;
                                         new DbManager().upDateTaskBeanWhereId(taskBean.getNumid(), taskBean.getId(), check);
                                         EventBusUtils.sendEvent(new Event(""), EventBusTags.CHECK);
@@ -168,9 +167,9 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
                                 .setRightButton("设置为未盘", new AppDialog.OnButtonClickListener() {
                                     @Override
                                     public void onClick(String val) {
-                                        new DbManager().upDateAssetsBeanStateWhereId(mList.get(position).getId(), 0);
+                                        new DbManager().upDateAssetsBeanStateWhereId(mAdapter.getData().get(position).getId(), 0);
                                         //获取数据库中已盘数量-1
-                                        TaskBean taskBean= new DbManager().  queryTaskBeanWhereID(mList.get(position).getCheckId());
+                                        TaskBean taskBean= new DbManager().  queryTaskBeanWhereID(mAdapter.getData().get(position).getCheckId());
                                         int check = new DbManager().queryTaskBeanWhereUid(taskBean.getNumid()).getCheckNum() - 1;
                                         new DbManager().upDateTaskBeanWhereId(taskBean.getNumid(), taskBean.getId(), check);
                                         EventBusUtils.sendEvent(new Event(""), EventBusTags.CHECK);
