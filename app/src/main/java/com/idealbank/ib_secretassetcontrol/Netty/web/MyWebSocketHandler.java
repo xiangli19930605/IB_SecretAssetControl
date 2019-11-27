@@ -171,6 +171,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
                         EventBusUtils.sendEvent(new Event(""), EventBusTags.REFRESH);
                     }else{
                         //先插入任务，再插入
+                        TaskBean taskBean=upload.getCheck();
                         new DbManager().insertTaskBean(upload.getCheck());
                         new DbManager().insertInTxAssetsBean(upload.getCheckAssets());
                         EventBusUtils.sendEvent(new Event(""), EventBusTags.REFRESH);

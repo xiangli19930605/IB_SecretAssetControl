@@ -25,23 +25,24 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property TypeName = new Property(1, String.class, "typeName", false, "TYPE_NAME");
-        public final static Property AssetUserState = new Property(2, int.class, "assetUserState", false, "ASSET_USER_STATE");
-        public final static Property Spec = new Property(3, String.class, "spec", false, "SPEC");
-        public final static Property TypeCode = new Property(4, String.class, "typeCode", false, "TYPE_CODE");
-        public final static Property CurName = new Property(5, String.class, "curName", false, "CUR_NAME");
-        public final static Property Assets = new Property(6, String.class, "assets", false, "ASSETS");
-        public final static Property BelongDept = new Property(7, String.class, "belongDept", false, "BELONG_DEPT");
-        public final static Property CheckState = new Property(8, int.class, "checkState", false, "CHECK_STATE");
-        public final static Property AssetName = new Property(9, String.class, "assetName", false, "ASSET_NAME");
-        public final static Property CueUser = new Property(10, String.class, "cueUser", false, "CUE_USER");
-        public final static Property Location = new Property(11, String.class, "location", false, "LOCATION");
-        public final static Property CheckId = new Property(12, String.class, "checkId", false, "CHECK_ID");
-        public final static Property RfidId = new Property(13, String.class, "rfidId", false, "RFID_ID");
-        public final static Property Brand = new Property(14, String.class, "brand", false, "BRAND");
-        public final static Property BelongName = new Property(15, String.class, "belongName", false, "BELONG_NAME");
-        public final static Property Remark = new Property(16, String.class, "remark", false, "REMARK");
-        public final static Property IsExand = new Property(17, Boolean.class, "isExand", false, "IS_EXAND");
+        public final static Property Taskbeanid = new Property(1, Long.class, "taskbeanid", false, "TASKBEANID");
+        public final static Property TypeName = new Property(2, String.class, "typeName", false, "TYPE_NAME");
+        public final static Property AssetUserState = new Property(3, int.class, "assetUserState", false, "ASSET_USER_STATE");
+        public final static Property Spec = new Property(4, String.class, "spec", false, "SPEC");
+        public final static Property TypeCode = new Property(5, String.class, "typeCode", false, "TYPE_CODE");
+        public final static Property CurName = new Property(6, String.class, "curName", false, "CUR_NAME");
+        public final static Property Assets = new Property(7, String.class, "assets", false, "ASSETS");
+        public final static Property BelongDept = new Property(8, String.class, "belongDept", false, "BELONG_DEPT");
+        public final static Property CheckState = new Property(9, int.class, "checkState", false, "CHECK_STATE");
+        public final static Property AssetName = new Property(10, String.class, "assetName", false, "ASSET_NAME");
+        public final static Property CueUser = new Property(11, String.class, "cueUser", false, "CUE_USER");
+        public final static Property Location = new Property(12, String.class, "location", false, "LOCATION");
+        public final static Property CheckId = new Property(13, String.class, "checkId", false, "CHECK_ID");
+        public final static Property RfidId = new Property(14, String.class, "rfidId", false, "RFID_ID");
+        public final static Property Brand = new Property(15, String.class, "brand", false, "BRAND");
+        public final static Property BelongName = new Property(16, String.class, "belongName", false, "BELONG_NAME");
+        public final static Property Remark = new Property(17, String.class, "remark", false, "REMARK");
+        public final static Property IsExand = new Property(18, Boolean.class, "isExand", false, "IS_EXAND");
     }
 
 
@@ -58,23 +59,24 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"ASSETS_BEAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"TYPE_NAME\" TEXT," + // 1: typeName
-                "\"ASSET_USER_STATE\" INTEGER NOT NULL ," + // 2: assetUserState
-                "\"SPEC\" TEXT," + // 3: spec
-                "\"TYPE_CODE\" TEXT," + // 4: typeCode
-                "\"CUR_NAME\" TEXT," + // 5: curName
-                "\"ASSETS\" TEXT," + // 6: assets
-                "\"BELONG_DEPT\" TEXT," + // 7: belongDept
-                "\"CHECK_STATE\" INTEGER NOT NULL ," + // 8: checkState
-                "\"ASSET_NAME\" TEXT," + // 9: assetName
-                "\"CUE_USER\" TEXT," + // 10: cueUser
-                "\"LOCATION\" TEXT," + // 11: location
-                "\"CHECK_ID\" TEXT," + // 12: checkId
-                "\"RFID_ID\" TEXT," + // 13: rfidId
-                "\"BRAND\" TEXT," + // 14: brand
-                "\"BELONG_NAME\" TEXT," + // 15: belongName
-                "\"REMARK\" TEXT," + // 16: remark
-                "\"IS_EXAND\" INTEGER);"); // 17: isExand
+                "\"TASKBEANID\" INTEGER," + // 1: taskbeanid
+                "\"TYPE_NAME\" TEXT," + // 2: typeName
+                "\"ASSET_USER_STATE\" INTEGER NOT NULL ," + // 3: assetUserState
+                "\"SPEC\" TEXT," + // 4: spec
+                "\"TYPE_CODE\" TEXT," + // 5: typeCode
+                "\"CUR_NAME\" TEXT," + // 6: curName
+                "\"ASSETS\" TEXT," + // 7: assets
+                "\"BELONG_DEPT\" TEXT," + // 8: belongDept
+                "\"CHECK_STATE\" INTEGER NOT NULL ," + // 9: checkState
+                "\"ASSET_NAME\" TEXT," + // 10: assetName
+                "\"CUE_USER\" TEXT," + // 11: cueUser
+                "\"LOCATION\" TEXT," + // 12: location
+                "\"CHECK_ID\" TEXT," + // 13: checkId
+                "\"RFID_ID\" TEXT," + // 14: rfidId
+                "\"BRAND\" TEXT," + // 15: brand
+                "\"BELONG_NAME\" TEXT," + // 16: belongName
+                "\"REMARK\" TEXT," + // 17: remark
+                "\"IS_EXAND\" INTEGER);"); // 18: isExand
     }
 
     /** Drops the underlying database table. */
@@ -92,81 +94,86 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long taskbeanid = entity.getTaskbeanid();
+        if (taskbeanid != null) {
+            stmt.bindLong(2, taskbeanid);
+        }
+ 
         String typeName = entity.getTypeName();
         if (typeName != null) {
-            stmt.bindString(2, typeName);
+            stmt.bindString(3, typeName);
         }
-        stmt.bindLong(3, entity.getAssetUserState());
+        stmt.bindLong(4, entity.getAssetUserState());
  
         String spec = entity.getSpec();
         if (spec != null) {
-            stmt.bindString(4, spec);
+            stmt.bindString(5, spec);
         }
  
         String typeCode = entity.getTypeCode();
         if (typeCode != null) {
-            stmt.bindString(5, typeCode);
+            stmt.bindString(6, typeCode);
         }
  
         String curName = entity.getCurName();
         if (curName != null) {
-            stmt.bindString(6, curName);
+            stmt.bindString(7, curName);
         }
  
         String assets = entity.getAssets();
         if (assets != null) {
-            stmt.bindString(7, assets);
+            stmt.bindString(8, assets);
         }
  
         String belongDept = entity.getBelongDept();
         if (belongDept != null) {
-            stmt.bindString(8, belongDept);
+            stmt.bindString(9, belongDept);
         }
-        stmt.bindLong(9, entity.getCheckState());
+        stmt.bindLong(10, entity.getCheckState());
  
         String assetName = entity.getAssetName();
         if (assetName != null) {
-            stmt.bindString(10, assetName);
+            stmt.bindString(11, assetName);
         }
  
         String cueUser = entity.getCueUser();
         if (cueUser != null) {
-            stmt.bindString(11, cueUser);
+            stmt.bindString(12, cueUser);
         }
  
         String location = entity.getLocation();
         if (location != null) {
-            stmt.bindString(12, location);
+            stmt.bindString(13, location);
         }
  
         String checkId = entity.getCheckId();
         if (checkId != null) {
-            stmt.bindString(13, checkId);
+            stmt.bindString(14, checkId);
         }
  
         String rfidId = entity.getRfidId();
         if (rfidId != null) {
-            stmt.bindString(14, rfidId);
+            stmt.bindString(15, rfidId);
         }
  
         String brand = entity.getBrand();
         if (brand != null) {
-            stmt.bindString(15, brand);
+            stmt.bindString(16, brand);
         }
  
         String belongName = entity.getBelongName();
         if (belongName != null) {
-            stmt.bindString(16, belongName);
+            stmt.bindString(17, belongName);
         }
  
         String remark = entity.getRemark();
         if (remark != null) {
-            stmt.bindString(17, remark);
+            stmt.bindString(18, remark);
         }
  
         Boolean isExand = entity.getIsExand();
         if (isExand != null) {
-            stmt.bindLong(18, isExand ? 1L: 0L);
+            stmt.bindLong(19, isExand ? 1L: 0L);
         }
     }
 
@@ -179,81 +186,86 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long taskbeanid = entity.getTaskbeanid();
+        if (taskbeanid != null) {
+            stmt.bindLong(2, taskbeanid);
+        }
+ 
         String typeName = entity.getTypeName();
         if (typeName != null) {
-            stmt.bindString(2, typeName);
+            stmt.bindString(3, typeName);
         }
-        stmt.bindLong(3, entity.getAssetUserState());
+        stmt.bindLong(4, entity.getAssetUserState());
  
         String spec = entity.getSpec();
         if (spec != null) {
-            stmt.bindString(4, spec);
+            stmt.bindString(5, spec);
         }
  
         String typeCode = entity.getTypeCode();
         if (typeCode != null) {
-            stmt.bindString(5, typeCode);
+            stmt.bindString(6, typeCode);
         }
  
         String curName = entity.getCurName();
         if (curName != null) {
-            stmt.bindString(6, curName);
+            stmt.bindString(7, curName);
         }
  
         String assets = entity.getAssets();
         if (assets != null) {
-            stmt.bindString(7, assets);
+            stmt.bindString(8, assets);
         }
  
         String belongDept = entity.getBelongDept();
         if (belongDept != null) {
-            stmt.bindString(8, belongDept);
+            stmt.bindString(9, belongDept);
         }
-        stmt.bindLong(9, entity.getCheckState());
+        stmt.bindLong(10, entity.getCheckState());
  
         String assetName = entity.getAssetName();
         if (assetName != null) {
-            stmt.bindString(10, assetName);
+            stmt.bindString(11, assetName);
         }
  
         String cueUser = entity.getCueUser();
         if (cueUser != null) {
-            stmt.bindString(11, cueUser);
+            stmt.bindString(12, cueUser);
         }
  
         String location = entity.getLocation();
         if (location != null) {
-            stmt.bindString(12, location);
+            stmt.bindString(13, location);
         }
  
         String checkId = entity.getCheckId();
         if (checkId != null) {
-            stmt.bindString(13, checkId);
+            stmt.bindString(14, checkId);
         }
  
         String rfidId = entity.getRfidId();
         if (rfidId != null) {
-            stmt.bindString(14, rfidId);
+            stmt.bindString(15, rfidId);
         }
  
         String brand = entity.getBrand();
         if (brand != null) {
-            stmt.bindString(15, brand);
+            stmt.bindString(16, brand);
         }
  
         String belongName = entity.getBelongName();
         if (belongName != null) {
-            stmt.bindString(16, belongName);
+            stmt.bindString(17, belongName);
         }
  
         String remark = entity.getRemark();
         if (remark != null) {
-            stmt.bindString(17, remark);
+            stmt.bindString(18, remark);
         }
  
         Boolean isExand = entity.getIsExand();
         if (isExand != null) {
-            stmt.bindLong(18, isExand ? 1L: 0L);
+            stmt.bindLong(19, isExand ? 1L: 0L);
         }
     }
 
@@ -266,23 +278,24 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
     public AssetsBean readEntity(Cursor cursor, int offset) {
         AssetsBean entity = new AssetsBean( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // typeName
-            cursor.getInt(offset + 2), // assetUserState
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // spec
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // typeCode
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // curName
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // assets
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // belongDept
-            cursor.getInt(offset + 8), // checkState
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // assetName
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // cueUser
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // location
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // checkId
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // rfidId
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // brand
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // belongName
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // remark
-            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0 // isExand
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // taskbeanid
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // typeName
+            cursor.getInt(offset + 3), // assetUserState
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // spec
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // typeCode
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // curName
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // assets
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // belongDept
+            cursor.getInt(offset + 9), // checkState
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // assetName
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // cueUser
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // location
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // checkId
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // rfidId
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // brand
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // belongName
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // remark
+            cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0 // isExand
         );
         return entity;
     }
@@ -290,23 +303,24 @@ public class AssetsBeanDao extends AbstractDao<AssetsBean, Long> {
     @Override
     public void readEntity(Cursor cursor, AssetsBean entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setTypeName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setAssetUserState(cursor.getInt(offset + 2));
-        entity.setSpec(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setTypeCode(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setCurName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setAssets(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setBelongDept(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setCheckState(cursor.getInt(offset + 8));
-        entity.setAssetName(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setCueUser(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setLocation(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setCheckId(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setRfidId(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setBrand(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setBelongName(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setRemark(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setIsExand(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
+        entity.setTaskbeanid(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setTypeName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setAssetUserState(cursor.getInt(offset + 3));
+        entity.setSpec(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTypeCode(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setCurName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setAssets(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setBelongDept(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setCheckState(cursor.getInt(offset + 9));
+        entity.setAssetName(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setCueUser(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setLocation(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setCheckId(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setRfidId(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setBrand(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setBelongName(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setRemark(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setIsExand(cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0);
      }
     
     @Override

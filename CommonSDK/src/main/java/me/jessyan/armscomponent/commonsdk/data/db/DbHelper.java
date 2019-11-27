@@ -70,6 +70,8 @@ public interface DbHelper {
     //根据状态查询资产
     List<AssetsBean> queryAssetsBeanWhereIdandState(String data, int state);
 
+//    List<AssetsBean> queryAssetsBeanWhereTaskIdIdandState(Long data, int state);
+
     //模糊查询 根据rfid 查询是哪个资产
     AssetsBean queryAssetsBeanWhereRfid(String frid);
 

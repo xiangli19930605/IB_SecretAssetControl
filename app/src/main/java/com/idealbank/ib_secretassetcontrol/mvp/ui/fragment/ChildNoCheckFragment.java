@@ -28,6 +28,7 @@ import com.idealbank.ib_secretassetcontrol.R;
 
 import org.simple.eventbus.Subscriber;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,12 +53,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * Description:
  * <p>
  * Created by MVPArmsTemplate on 06/17/2019 12:24
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
- * <a href="https://github.com/JessYanCoding/MVPArms/wiki">See me</a>
- * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
- * ================================================
+ * 未盘点
  */
 public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> implements ChildNoCheckContract.View {
     @BindView(R.id.recyclerView)
@@ -68,10 +64,11 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
     @Inject
     List<AssetsBean> mList;
     String taskid;
-    public static ChildNoCheckFragment newInstance(String taskid) {
+    TaskBean taskBean;
+    public static ChildNoCheckFragment newInstance(TaskBean bean) {
         ChildNoCheckFragment fragment = new ChildNoCheckFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("taskid", taskid);
+        bundle.putSerializable("taskBean", (Serializable) bean);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -100,8 +97,8 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
     }
 
     private void getDate() {
-
-        taskid= getArguments().getString("taskid");
+        taskBean = (TaskBean) getArguments().getSerializable("taskBean");
+        taskid= taskBean.getId();
         mList  =   new DbManager(). queryAssetsBeanWhereIdandState(taskid,0);
         mAdapter.replaceData(mList);
     }

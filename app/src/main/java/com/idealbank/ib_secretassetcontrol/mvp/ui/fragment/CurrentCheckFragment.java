@@ -297,7 +297,7 @@ public class CurrentCheckFragment extends BaseActionBarFragment<CurrentCheckPres
 //        new DbManager().insertTaskBean(taskBean3);
         if (insertID >= 0) {
             Toast.makeText(getActivity(), "插入 User 成功", Toast.LENGTH_SHORT).show();
-            insertOrders(taskBean.getId());
+            insertOrders(taskBean.getId(),taskBean.getNumid(),taskBean2.getNumid());
         } else {
             Toast.makeText(getActivity(), "插入User 失败", Toast.LENGTH_SHORT).show();
         }
@@ -305,26 +305,30 @@ public class CurrentCheckFragment extends BaseActionBarFragment<CurrentCheckPres
 
     }
 
-    private void insertOrders(String taskid) {
+    private void insertOrders(String taskid,Long id1,Long id2) {
         AssetsBean myOrder1 = new AssetsBean();
+        myOrder1.setTaskbeanid(id1);
         myOrder1.setAssetName("电脑");
         myOrder1.setTypeName("电器");
         myOrder1.setAssets("1001");
         myOrder1.setCheckId(taskid);
         myOrder1.setRfidId("2019073001");
         AssetsBean myOrder2 = new AssetsBean();
+        myOrder2.setTaskbeanid(id1);
         myOrder2.setAssetName("手机");
         myOrder2.setTypeName("电器");
         myOrder2.setAssets("1002");
         myOrder2.setCheckId(taskid);
         myOrder2.setRfidId("2019073002");
         AssetsBean myOrder3 = new AssetsBean();
+        myOrder3.setTaskbeanid(id1);
         myOrder3.setAssetName("耳机");
         myOrder3.setTypeName("电器");
         myOrder3.setAssets("1003");
         myOrder3.setCheckId(taskid);
         myOrder3.setRfidId("2019073003");
         AssetsBean myOrder4 = new AssetsBean();
+        myOrder4.setTaskbeanid(id1);
         myOrder4.setAssetName("打印机");
         myOrder4.setTypeName("电器");
         myOrder4.setAssets("1004");
@@ -334,31 +338,37 @@ public class CurrentCheckFragment extends BaseActionBarFragment<CurrentCheckPres
         long orderId2 = new DbManager().insertAssetsBean(myOrder2);
         new DbManager().insertAssetsBean(myOrder3);
         new DbManager().insertAssetsBean(myOrder4);
+
         AssetsBean myOrder5 = new AssetsBean();
+        myOrder5.setTaskbeanid(id2);
         myOrder5.setAssetName("电脑");
         myOrder5.setTypeName("电器");
         myOrder5.setCheckId("1234");
         myOrder5.setAssets("1005");
         myOrder5.setRfidId("2019073005");
         AssetsBean myOrder6 = new AssetsBean();
+        myOrder6.setTaskbeanid(id2);
         myOrder6.setAssetName("手机");
         myOrder6.setTypeName("电器");
         myOrder6.setAssets("1006");
         myOrder6.setCheckId("1234");
         myOrder6.setRfidId("2019073006");
         AssetsBean myOrder7 = new AssetsBean();
+        myOrder7.setTaskbeanid(id2);
         myOrder7.setAssetName("耳机");
         myOrder7.setAssets("1007");
         myOrder7.setTypeName("电器");
         myOrder7.setCheckId("1234");
         myOrder7.setRfidId("2019073007");
         AssetsBean myOrder8 = new AssetsBean();
+        myOrder8.setTaskbeanid(id2);
         myOrder8.setAssetName("打印机");
         myOrder8.setTypeName("电器");
         myOrder8.setAssets("1008");
         myOrder8.setCheckId("1234");
         myOrder8.setRfidId("20190008");
         AssetsBean myOrder9 = new AssetsBean();
+        myOrder9.setTaskbeanid(id2);
         myOrder9.setAssetName("打印机");
         myOrder9.setTypeName("电器");
         myOrder9.setAssets("1009");

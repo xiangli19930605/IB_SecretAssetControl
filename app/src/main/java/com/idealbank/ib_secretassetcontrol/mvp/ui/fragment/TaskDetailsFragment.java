@@ -3,6 +3,7 @@ package com.idealbank.ib_secretassetcontrol.mvp.ui.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -164,15 +165,15 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
             }
         });
         app_bar.addOnOffsetChangedListener(listener);
-
+        time = new TimeCount(15000, 1000);
         setView();
 
 //开启服务
-        boolean b = AppApplication.sv_Main.Create(OnMsg);
-        //先关闭盘点
-        AppApplication.sv_Main.DoInventoryTag(false);
-        // rfid power on
-        AppApplication. sv_Main.gpio_rfid_config(true);
+//        boolean b = AppApplication.sv_Main.Create(OnMsg);
+//        //先关闭盘点
+//        AppApplication.sv_Main.DoInventoryTag(false);
+//        // rfid power on
+//        AppApplication. sv_Main.gpio_rfid_config(true);
     }
 
     private void setView() {
@@ -194,7 +195,7 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
         stv_createName.setCenterString(taskBean.getCreateName());
 
 
-        mViewPager.setAdapter(new WechatPagerFragmentAdapter(getChildFragmentManager(), taskBean.getId()));
+        mViewPager.setAdapter(new WechatPagerFragmentAdapter(getChildFragmentManager(), taskBean));
         tabLayout.setupWithViewPager(mViewPager);
 
         handler.sendEmptyMessageDelayed(0, 100);
@@ -204,17 +205,42 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 LogUtils.e("isChecked:"+isChecked);
                 if (isChecked) {
-                    AppApplication.sv_Main.DoInventoryTag(true);
-                    cbCheck.setText("结束盘点");
+                    openRfid();
+                    cbCheck.setText("停止盘点");
+                    time.start();
                 } else {
-                    AppApplication.sv_Main.DoInventoryTag(false);
                     cbCheck.setText("开始盘点");
+                    closeRfid();
+                    time.onFinish();
                 }
             }
         });
 
     }
+    private TimeCount time;
 
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if (cbCheck != null && cbCheck.isChecked()) {
+                cbCheck.setText("停止盘点倒计时" + "(" + millisUntilFinished / 1000 + ") ");
+            }
+        }
+
+        @Override
+        public void onFinish() {
+            if (cbCheck != null) {
+                cbCheck.setText("开始盘点");
+                cbCheck.setChecked(false);
+            }
+            closeRfid();
+//            AppApplication.sv_Main.DoInventoryTag(false);
+        }
+    }
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -307,19 +333,31 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
     public void onDestroy() {
         super.onDestroy();
         //关闭服务
-//        AppApplication.sv_Main.Free();
+        closeRfid();
+        EventBusUtils.sendEvent(new Event(""), EventBusTags.REFRESH);
+    }
+    private void openRfid() {
+        //开启服务
+        boolean b = AppApplication.sv_Main.Create(OnMsg);
+        //先关闭盘点
+        AppApplication.sv_Main.DoInventoryTag(false);
+        // rfid power on
+        AppApplication.sv_Main.gpio_rfid_config(true);
+        handler.sendMessageDelayed(new Message(),2000);
+
+    }
+
+    private void closeRfid() {
         try {
             AppApplication.sv_Main.DoInventoryTag(false);
             AppApplication.sv_Main.DoIndentify(false);
-            AppApplication.  sv_Main.gpio_rfid_config(false);
+            AppApplication.sv_Main.gpio_rfid_config(false);
             AppApplication.sv_Main.Free();
         } catch (UnsupportedOperationException e) {
             System.out.print("******************");
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.print("******************");
         }
-        EventBusUtils.sendEvent(new Event(""), EventBusTags.REFRESH);
     }
-
 
 }

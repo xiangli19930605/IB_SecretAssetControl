@@ -164,6 +164,8 @@ public class HistoryFragment extends BaseActionBarFragment<HistoryPresenter> imp
                 switch (view.getId()) {
                     case R.id.content_main:
                         LogUtils.warnInfo("" + position);
+
+
                         break;
                     case R.id.right_menu_1:
                         new AppDialog(_mActivity, DialogType.DEFAULT).setTitle("确定从盘查表中删除此项？")

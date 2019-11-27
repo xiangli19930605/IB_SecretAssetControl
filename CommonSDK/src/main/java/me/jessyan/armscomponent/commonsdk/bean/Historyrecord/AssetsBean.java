@@ -19,6 +19,7 @@ public class AssetsBean {
     //设计此字段，然后在Card中引用它，以便于Card来识别它
 //    private Long  rfid;
 
+    private Long  taskbeanid;//任务ID  关联任务表的numid
 
     private String typeName;  //资产类型名称
     private int     assetUserState;  //资产使用状态   0在库1在用2毁坏不能用3其他
@@ -38,13 +39,14 @@ public class AssetsBean {
     private String      remark; //所属部门名称
     private Boolean      isExand=false; //是否展开
 
-    @Generated(hash = 1188039741)
-    public AssetsBean(Long id, String typeName, int assetUserState, String spec,
-            String typeCode, String curName, String assets, String belongDept,
-            int checkState, String assetName, String cueUser, String location,
-            String checkId, String rfidId, String brand, String belongName,
-            String remark, Boolean isExand) {
+    @Generated(hash = 1218324724)
+    public AssetsBean(Long id, Long taskbeanid, String typeName, int assetUserState,
+            String spec, String typeCode, String curName, String assets,
+            String belongDept, int checkState, String assetName, String cueUser,
+            String location, String checkId, String rfidId, String brand,
+            String belongName, String remark, Boolean isExand) {
         this.id = id;
+        this.taskbeanid = taskbeanid;
         this.typeName = typeName;
         this.assetUserState = assetUserState;
         this.spec = spec;
@@ -173,6 +175,12 @@ public class AssetsBean {
     }
     public void setIsExand(Boolean isExand) {
         this.isExand = isExand;
+    }
+    public Long getTaskbeanid() {
+        return this.taskbeanid;
+    }
+    public void setTaskbeanid(Long taskbeanid) {
+        this.taskbeanid = taskbeanid;
     }
 
 

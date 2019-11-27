@@ -7,24 +7,26 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.idealbank.ib_secretassetcontrol.mvp.ui.fragment.ChildCheckFragment;
 import com.idealbank.ib_secretassetcontrol.mvp.ui.fragment.ChildNoCheckFragment;
 
+import me.jessyan.armscomponent.commonsdk.bean.Historyrecord.TaskBean;
+
 
 /**
  * Created by YoKeyword on 16/6/5.
  */
 public class WechatPagerFragmentAdapter extends FragmentPagerAdapter {
     private String[] mTitles={"未盘点","已盘点"};
-    String id;
-    public WechatPagerFragmentAdapter(FragmentManager fm,String id) {
+    TaskBean taskBean;
+    public WechatPagerFragmentAdapter(FragmentManager fm, TaskBean taskBean) {
         super(fm);
-        this.id = id;
+        this.taskBean = taskBean;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return ChildNoCheckFragment.newInstance(id);
+            return ChildNoCheckFragment.newInstance(taskBean);
         } else {
-            return ChildCheckFragment.newInstance(id);
+            return ChildCheckFragment.newInstance(taskBean);
         }
     }
 

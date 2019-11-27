@@ -29,6 +29,7 @@ import com.idealbank.ib_secretassetcontrol.R;
 import org.json.JSONObject;
 import org.simple.eventbus.Subscriber;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -70,11 +71,11 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
     @Inject
     List<AssetsBean> mList;
     String taskid;
-
-    public static ChildCheckFragment newInstance(String taskid) {
+    TaskBean taskBean;
+    public static ChildCheckFragment newInstance(TaskBean bean) {
         Bundle bundle = new Bundle();
         ChildCheckFragment fragment = new ChildCheckFragment();
-        bundle.putString("taskid", taskid);
+        bundle.putSerializable("taskBean", (Serializable) bean);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -97,8 +98,8 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
-        taskid = getArguments().getString("taskid");
+        taskBean = (TaskBean) getArguments().getSerializable("taskBean");
+        taskid= taskBean.getId();
         initRecyclerView();
         getDate();
         mRecyclerView.setAdapter(mAdapter);

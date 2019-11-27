@@ -4,6 +4,8 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
+import java.io.Serializable;
+
 /**
  * @author quchao
  * @date 2018/3/5
@@ -12,7 +14,8 @@ import org.greenrobot.greendao.annotation.Id;
 //        @Index(value = id DESC, unique = true)
 //})
 @Entity
-public class TaskBean  extends  SelectIlem{
+public class TaskBean  extends  SelectIlem implements Serializable {
+    private static final long serialVersionUID = 5298086812218887585L;
     //ID主键自增
     @Id(autoincrement = true)
     private Long numid;
