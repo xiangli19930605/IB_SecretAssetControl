@@ -111,7 +111,7 @@ public class InventoryFragment extends BaseFragment<InventoryPresenter> implemen
 
     }
 
-    @OnClick({R.id.btn_received, R.id.btn_send, R.id.btn_upload,R.id.public_toolbar_right})
+    @OnClick({R.id.btn_received, R.id.btn_send, R.id.btn_upload})
     public void onClick(View v) {
         switch (v.getId()){
 
@@ -153,8 +153,7 @@ public class InventoryFragment extends BaseFragment<InventoryPresenter> implemen
                     showToast("未连接");
                 }
                 break;
-            case R.id.public_toolbar_right:
-                break;
+
 
 
         }

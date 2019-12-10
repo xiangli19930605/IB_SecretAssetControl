@@ -29,19 +29,20 @@
                 android:orientation="vertical"
                 app:layout_collapseMode="pin"
                 app:layout_collapseParallaxMultiplier="0.7">
-                <TextView
-                    android:id="@+id/tv_person_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_50"
-                    android:text="我的设置"
-                    android:textColor="@color/light_white"
-                    android:textSize="16sp" />
 
             </LinearLayout>
 
-            <!--<include layout="@layout/public_include_title" />-->
-
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/public_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_69"
+                android:background="@color/transparent"
+                android:paddingTop="@dimen/dp_20"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:title="当前盘查"
+                app:titleTextColor="@color/white">
+               </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
 
