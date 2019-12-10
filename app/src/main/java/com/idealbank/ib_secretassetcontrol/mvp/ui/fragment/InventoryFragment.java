@@ -1,14 +1,19 @@
 package com.idealbank.ib_secretassetcontrol.mvp.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.allen.library.SuperTextView;
 import com.idealbank.ib_secretassetcontrol.Netty.ChannelMap;
 import com.idealbank.ib_secretassetcontrol.Netty.bean.Message;
 import com.idealbank.ib_secretassetcontrol.Netty.bean.MsgType;
@@ -24,14 +29,11 @@ import com.idealbank.ib_secretassetcontrol.mvp.presenter.InventoryPresenter;
 
 import com.idealbank.ib_secretassetcontrol.R;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import me.jessyan.armscomponent.commonsdk.app.MyApplication;
 import me.jessyan.armscomponent.commonsdk.base.fragment.BaseFragment;
 import me.jessyan.armscomponent.commonsdk.utils.GsonUtil;
-import me.jessyan.autosize.utils.LogUtils;
-
-import static com.jess.arms.utils.Preconditions.checkNotNull;
 import static me.jessyan.armscomponent.commonsdk.utils.ToastUtil.showToast;
 
 
@@ -48,7 +50,8 @@ import static me.jessyan.armscomponent.commonsdk.utils.ToastUtil.showToast;
  * ================================================
  */
 public class InventoryFragment extends BaseFragment<InventoryPresenter> implements InventoryContract.View {
-
+    @BindView(R.id.btn_version)
+    SuperTextView btn_version;
     public static InventoryFragment newInstance() {
         InventoryFragment fragment = new InventoryFragment();
         return fragment;
@@ -71,10 +74,23 @@ public class InventoryFragment extends BaseFragment<InventoryPresenter> implemen
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        btn_version.setRightString( getAppVersionName(_mActivity));
     }
 
-
+    /**
+     * 返回当前程序版本名
+     */
+    public static String getAppVersionName(Context context) {
+        String versionName=null;
+        try {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionName = pi.versionName;
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionName;
+    }
     @Override
     public void setData(@Nullable Object data) {
 
