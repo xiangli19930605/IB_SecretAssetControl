@@ -185,7 +185,6 @@ public class AppDialog {
             case DialogType.ADDASSET:
                 //增加备注
                 ll_top.setVisibility(View.VISIBLE);
-
                 setTitleText();
                 edtInput.setVisibility(View.VISIBLE);
                 tvContent.setVisibility(View.GONE);
