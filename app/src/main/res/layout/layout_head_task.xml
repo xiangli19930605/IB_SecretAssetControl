@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_12"
-                android:text="未盘：1" />
+                android:text="未盘：" />
 
 
             <LinearLayout
@@ -60,7 +60,7 @@
                 android:drawableLeft="@mipmap/ic_point_yellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已盘：1" />
+                android:text="已盘：" />
 
         </LinearLayout>
 

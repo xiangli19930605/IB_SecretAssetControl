@@ -198,7 +198,7 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
         mViewPager.setAdapter(new WechatPagerFragmentAdapter(getChildFragmentManager(), taskBean));
         tabLayout.setupWithViewPager(mViewPager);
 
-        handler.sendEmptyMessageDelayed(0, 100);
+//        handler.sendEmptyMessageDelayed(0, 100);
 
         cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -237,8 +237,8 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
                 cbCheck.setText("开始盘点");
                 cbCheck.setChecked(false);
             }
-            closeRfid();
-//            AppApplication.sv_Main.DoInventoryTag(false);
+//            closeRfid();
+            AppApplication.sv_Main.DoInventoryTag(false);
         }
     }
     @SuppressLint("HandlerLeak")
@@ -246,7 +246,8 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            //先更新查询taskBean
+            AppApplication.sv_Main.DoInventoryTag(true);
+            //更新查询taskBean状态   顶部完成率状态UI更新
             taskBean = new DbManager().queryTaskBeanWhereUid(numid);
             circleProgressBar.setProgress((int) ((new BigDecimal((float) taskBean.getCheckNum() / taskBean.getTotal()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()) * 100));
             circleProgressBar.setTotalText("" + taskBean.getTotal());
@@ -343,6 +344,8 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
         AppApplication.sv_Main.DoInventoryTag(false);
         // rfid power on
         AppApplication.sv_Main.gpio_rfid_config(true);
+
+        AppApplication.sv_Main.DoInventoryTag(true);
         handler.sendMessageDelayed(new Message(),2000);
 
     }
