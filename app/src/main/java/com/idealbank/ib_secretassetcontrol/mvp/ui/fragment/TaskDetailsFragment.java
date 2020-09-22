@@ -198,7 +198,7 @@ public class TaskDetailsFragment extends BaseFragment<TaskDetailsPresenter> impl
         mViewPager.setAdapter(new WechatPagerFragmentAdapter(getChildFragmentManager(), taskBean));
         tabLayout.setupWithViewPager(mViewPager);
 
-//        handler.sendEmptyMessageDelayed(0, 100);
+        handler.sendEmptyMessageDelayed(0, 100);
 
         cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

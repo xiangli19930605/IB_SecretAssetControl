@@ -40,7 +40,7 @@
                 android:paddingTop="@dimen/dp_20"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
-                app:title="当前盘查"
+                app:title="设置"
                 app:titleTextColor="@color/white">
                </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

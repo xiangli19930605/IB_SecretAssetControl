@@ -167,7 +167,8 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
         RfidData rfidData = (RfidData) event.getData();
         String val=rfidData.getTagid();
         for (int i = 0; i <mAdapter.getData().size() ; i++) {
-            if(mAdapter.getData().get(i).getAssets().equals(event.getData().toString())){
+            //手持机扫描后获取的RFID与下载列表比较
+            if(mAdapter.getData().get(i).getAssets().equals(val)){
                 //先模糊查询FRID编号，得到的资产ID；再通过资产ID，修改资产状态
 //                AssetsBean assetsBean = new DbManager().queryAssetsBeanWhereRfid(val);
                 AssetsBean assetsBean = new DbManager().queryAssetsBeanWhereAssetsAndCheckId(taskid,val);
