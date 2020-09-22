@@ -4,8 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.http.DefaultHttpHeaders;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 
@@ -19,9 +23,11 @@ public class MyWebSocketChannelHandler extends ChannelInitializer<SocketChannel>
         e.pipeline().addLast(new IdleStateHandler(10, 0, 0, TimeUnit.SECONDS));
 //        e.pipeline().addLast(idleStateTrigger);
         e.pipeline().addLast("http-codec", new HttpServerCodec());
-        e.pipeline().addLast("aggregator", new HttpObjectAggregator(65536*1024*1024*1024));
+        e.pipeline().addLast("aggregator", new HttpObjectAggregator(1024*1024*5));
         e.pipeline().addLast("http-chunked", new ChunkedWriteHandler());
+//        e.pipeline().addLast(new WebSocketServerProtocolHandler("/send",null,false,1048576*2));
         e.pipeline().addLast("handler", new MyWebSocketHandler());
+
 
     }
 }
