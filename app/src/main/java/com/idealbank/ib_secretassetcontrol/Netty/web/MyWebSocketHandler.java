@@ -217,7 +217,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
             return;
         }
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                WEB_SOCKET_URL, null, true,6553600);
+                WEB_SOCKET_URL, null, true,65536*1024);
         handshaker = wsFactory.newHandshaker(req);
         if (handshaker == null) {
             WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());

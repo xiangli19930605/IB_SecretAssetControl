@@ -113,7 +113,6 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.stv_remark:
-
                         new AppDialog(_mActivity, DialogType.ADDASSET)
                                 .setTitle("请为此资产添加备注")
                                 .setLeftButton("取消", new AppDialog.OnButtonClickListener() {
@@ -180,7 +179,6 @@ public class ChildNoCheckFragment extends BaseFragment<ChildNoCheckPresenter> im
                 EventBusUtils.sendEvent(new Event(""), EventBusTags.CHECK);
             }
         }
-
     }
 
 }

@@ -139,9 +139,7 @@ public class ChildCheckFragment extends BaseFragment<ChildCheckPresenter> implem
                                     }
                                 })
                                 .show();
-
                         break;
-
                 }
             }
         });

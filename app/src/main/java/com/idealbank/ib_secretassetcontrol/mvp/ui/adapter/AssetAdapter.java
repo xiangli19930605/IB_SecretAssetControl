@@ -82,9 +82,20 @@ public class AssetAdapter extends BaseQuickAdapter<AssetsBean, AssetAdapter.MyVi
         ((SuperTextView) helper.getView(R.id.stv_brand)).setCenterString(data.getBrand());
         ((SuperTextView) helper.getView(R.id.stv_spec)).setCenterString(data.getSpec());
         ((SuperTextView) helper.getView(R.id.stv_location)).setCenterString(data.getLocation());
-        ((SuperTextView) helper.getView(R.id.stv_checkState)).setCenterString(""+data.getCheckState());
+        //资产使用状态   0在库1在用2毁坏不能用3其他
+        String AssetUserState="";
+        if(data.getAssetUserState()==0){
+            AssetUserState="在库";
+        }else if(data.getAssetUserState()==1){
+            AssetUserState="在用";
+        }else if(data.getAssetUserState()==2){
+            AssetUserState="毁坏不能用";
+        }else if(data.getAssetUserState()==3){
+            AssetUserState="其他";
+        }
+        ((SuperTextView) helper.getView(R.id.stv_checkState)).setCenterString(AssetUserState);
         ((SuperTextView) helper.getView(R.id.stv_belongName)).setCenterString(data.getBelongName());
-        ((SuperTextView) helper.getView(R.id.stv_cueUser)).setCenterString(data.getCueUser());
+        ((SuperTextView) helper.getView(R.id.stv_cueUser)).setCenterString(data.getCurName());
 
         helper.addOnClickListener(R.id.stv_remark).addOnLongClickListener(R.id.ll_content);
 
@@ -103,7 +114,6 @@ public class AssetAdapter extends BaseQuickAdapter<AssetsBean, AssetAdapter.MyVi
                      data.setIsExand(false);
                     ((ImageView)helper.getView(R.id.img_arrow)).setImageResource(R.mipmap.ic_arrow_down);
 
-
                 }else{
 //                    ExpandableViewHoldersUtil.openH(helper,(LinearLayout) helper.getView(R.id.content),true);
 //                    helper.getView(R.id.content).setVisibility(View.VISIBLE);
@@ -113,6 +123,13 @@ public class AssetAdapter extends BaseQuickAdapter<AssetsBean, AssetAdapter.MyVi
                 }
             }
         });
+        if(data.getIsExand()){
+            HiddenAnimUtils.fadeIn( helper.getView(R.id.content));
+            ((ImageView)helper.getView(R.id.img_arrow)).setImageResource(R.mipmap.ic_arrow_up);
+        }else{
+            HiddenAnimUtils.fadeOut( helper.getView(R.id.content));
+            ((ImageView)helper.getView(R.id.img_arrow)).setImageResource(R.mipmap.ic_arrow_down);
+        }
     }
 
     public class MyViewHolder extends BaseViewHolder implements ExpandableViewHoldersUtil.Expandable{

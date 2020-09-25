@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -113,9 +114,23 @@ public class SearchHistoryFragment extends BaseToolBarFragment<SearchHistoryPres
         mPresenter.loadAllHistoryData();
 
         initRecyclerView();
-        et_search.addTextChangedListener(watcher);
-        et_search.setOnKeyListener(this);
+//        et_search.addTextChangedListener(watcher);
+//        et_search.setOnKeyListener(this);
 
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                switch (i) {
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        getDate(et_search.getText().toString());
+                        mPresenter.addHistoryData(et_search.getText().toString());
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
         flowlayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {

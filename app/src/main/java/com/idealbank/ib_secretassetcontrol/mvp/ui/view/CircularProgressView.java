@@ -94,7 +94,7 @@ public class CircularProgressView extends View {
         progressBarColor = typedArray.getColor(R.styleable.CircleProgressBar_progressColor, Color.parseColor("#fabe1b"));
         isBold = typedArray.getBoolean(R.styleable.CircleProgressBar_textBold, false);
         textColor = typedArray.getColor(R.styleable.CircleProgressBar_textColor, Color.WHITE);
-        roundWidth = typedArray.getDimensionPixelOffset(R.styleable.CircleProgressBar_lineWidth, 12);
+        roundWidth = typedArray.getDimensionPixelOffset(R.styleable.CircleProgressBar_lineWidth, 6);
         typedArray.recycle();
 
     }
@@ -102,9 +102,11 @@ public class CircularProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) { /** * 画外圆 */
         super.onDraw(canvas);
-        int center = getWidth() / 2;//圆心
-        int radius = (center - roundWidth / 2);// 半径
-
+//        int center = getWidth() / 2;//圆心
+//        int radius = (center - roundWidth / 2);// 半径
+        int center=150;
+        int radius=140;
+        LogUtils.warnInfo("textSize" + center+"radius"+radius);
         mPaint.setColor(outRoundColor); //外圆颜色
         mPaint.setStrokeWidth(roundWidth); //线的宽度
         mPaint.setStyle(Paint.Style.STROKE); //空心圆
@@ -155,7 +157,7 @@ public class CircularProgressView extends View {
         if (!TextUtils.isEmpty(mText)) {
             // 动态设置文字长为圆半径,计算字体大小
             float textLength = mText.length();
-            textSize = radius / textLength;
+            textSize = 30;
             mPaint.setTextSize(textSize);
             LogUtils.warnInfo("textSize" + textSize);
             // 将文字画到中间

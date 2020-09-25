@@ -19,6 +19,7 @@
             android:drawableLeft="@mipmap/ic_search_toolbar"
             android:drawablePadding="@dimen/dp_10"
             android:hint="@string/search_tint"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:labelFor="@id/search_edit"
             android:paddingEnd="@dimen/dp_1"

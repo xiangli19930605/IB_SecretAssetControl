@@ -171,11 +171,11 @@ public class DbHelperImpl implements DbHelper {
 //查询 资产为1230且  字符含有data的数据
         return qb.where(qb.and(AssetsBeanDao.Properties.CheckId.like(checkid),
                                 qb.or(
-                                        AssetsBeanDao.Properties.AssetName.like(data + "%"),
-                                        AssetsBeanDao.Properties.TypeName.like(data + "%"), AssetsBeanDao.Properties.Brand.like(data + "%"),
-                                        AssetsBeanDao.Properties.Location.like(data + "%"), AssetsBeanDao.Properties.BelongDept.like(data + "%"),
-                                        AssetsBeanDao.Properties.CurName.like(data + "%"), AssetsBeanDao.Properties.CheckState.like(data + "%"),
-                                        AssetsBeanDao.Properties.Spec.like(data + "%") , AssetsBeanDao.Properties.Assets.like(data + "%")
+                                        AssetsBeanDao.Properties.AssetName.like("%"+data + "%"),
+                                        AssetsBeanDao.Properties.TypeName.like("%" +data + "%"), AssetsBeanDao.Properties.Brand.like("%" +data + "%"),
+                                        AssetsBeanDao.Properties.Location.like("%" +data + "%"), AssetsBeanDao.Properties.BelongDept.like("%" +data + "%"),
+                                        AssetsBeanDao.Properties.CurName.like("%" +data + "%"), AssetsBeanDao.Properties.CheckState.like("%" +data + "%"),
+                                        AssetsBeanDao.Properties.Spec.like("%" +data + "%") , AssetsBeanDao.Properties.Assets.like("%" +data + "%")
                                  )
         )).list();
 
