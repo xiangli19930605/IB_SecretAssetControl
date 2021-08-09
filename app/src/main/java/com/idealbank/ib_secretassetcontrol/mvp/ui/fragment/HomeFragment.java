@@ -161,7 +161,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         } else if (i == R.id.btn_current) {
             EventBusUtils.sendEvent(new Event(EventBusTags.ONE), EventBusTags.JUMP_PAGE);
         } else if (i == R.id.btn_history) {
-            EventBusUtils.sendEvent(new Event(EventBusTags.TWO), EventBusTags.JUMP_PAGE);
+//            EventBusUtils.sendEvent(new Event(EventBusTags.TWO), EventBusTags.JUMP_PAGE);
+            ((MainFragment) getParentFragment()).startBrotherFragment(FRIDScanFragment.newInstance());
         }
 
     }

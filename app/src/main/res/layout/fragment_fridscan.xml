@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <CheckBox
+        android:id="@+id/btn_switch"
+        android:layout_width="@dimen/dp_340"
+        android:layout_height="33dp"
+        android:layout_gravity="center"
+        android:checked="false"
+        android:button="@null"
+        android:gravity="center"
+        android:text="开始盘点"
+        android:textColor="@color/gray"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

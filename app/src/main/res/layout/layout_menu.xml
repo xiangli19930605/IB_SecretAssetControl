@@ -42,6 +42,17 @@
                     android:textSize="@dimen/sp_13" />
 
                 <Button
+                    android:id="@+id/btn_history"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableTop="@mipmap/saoyisao"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="top|center"
+                    android:text="历史记录"
+                    android:textSize="@dimen/sp_13" />
+                <Button
                     android:id="@+id/btn_current"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="wrap_content"
@@ -52,19 +63,6 @@
                     android:gravity="top|center"
                     android:text="当前盘查"
                     android:textSize="@dimen/sp_13" />
-
-                <Button
-                    android:id="@+id/btn_history"
-                    android:layout_width="@dimen/dp_60"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:drawableTop="@mipmap/ic_history"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:gravity="top|center"
-                    android:text="历史记录"
-                    android:textSize="@dimen/sp_13" />
-
             </LinearLayout>
 
         </LinearLayout>

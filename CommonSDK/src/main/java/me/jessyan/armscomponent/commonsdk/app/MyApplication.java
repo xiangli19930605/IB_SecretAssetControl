@@ -36,6 +36,8 @@ import me.jessyan.armscomponent.commonsdk.utils.ServiceUtils;
 import me.jessyan.armscomponent.commonsdk.utils.ToastUtil;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
+import rfid_interface.RfidService;
+
 /**
  * Describe：基础Application所有需要模块化开发的module都需要继承自BaseApplication
  * Created by 吴天强 on 2018/10/12.
@@ -56,7 +58,7 @@ public class MyApplication extends BaseApplication  {
     public static Context getContext(){
         return context;
     }
-
+    public static RfidService sv_Main = RfidService.getInstance();
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
